@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta name="generator" content="Hugo 0.91.2" />
+
+  <title>
+      
+      Simeon Vincent
+      
+  </title>
+
+</head>
+
+
+  <body>
+
+    
+
+	
+<div class="h-feed">
+
+	
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://dotproto.com/2023/05/04/google-ads-in.html">Google Ads in Browser Extensions</a></h1>
+		
+
+		<a href="https://dotproto.com/2023/05/04/google-ads-in.html" class="u-url"><time class="dt-published" datetime="2023-05-08 11:26:13 -0700">May 8, 2023</time></a>
+
+		<div class="e-content">
+			 <p>Chrome Web Store policy allows ads in extensions, but can Google&rsquo;s ad products be used in browser extensions? Let&rsquo;s dig through some policy docs to find out.</p>
+<p>Someone  posted a question in the <a href="https://groups.google.com/a/chromium.org/g/chromium-extensions">chromium-extensions</a> Google Group a couple weeks ago asking whether they were allowed to use Google Ads in browser extensions. When I last looked into this I worked on the Chrome Extensions team and the short answer was &ldquo;you can&rsquo;t use Google&rsquo;s ad services, but you can use other services if the policies of those services allow it.&rdquo;</p>
+<p>Since then my relationship with this question has changed. Google and I have parted ways, I began building my <a href="https://incremental.software">extension dev consultancy</a>, and I&rsquo;m looking for other revenue streams to diversify my income. In other words, this question is more relevant to me than ever before. So, let’s see if we can&rsquo;t get a hard answer.</p>
+<p>In this post we’ll be taking a look at a few different Google policy sites and seeing what (if anything) they have to say about browser extensions.</p>
+<h2 id="chrome-web-store-policies">Chrome Web Store policies</h2>
+<p>Let’s start by reviewing the Chrome Web Store’s <a href="https://developer.chrome.com/docs/webstore/program-policies">Program Policies</a>. The <a href="https://developer.chrome.com/docs/webstore/program-policies/ads/">Ads policies</a> basically says that extensions can display ads as long as they conform to some specific requirements. One of those requirements immediately raises a red flag when it comes to inegrating Google ads.</p>
+<blockquote>
+<ol start="3">
+<li>Currently, AdSense may not be used to serve ads in Products, per <a href="https://support.google.com/adsense/answer/48182">AdSense policies</a>.</li>
+</ol>
+</blockquote>
+<p>If you do a web search for a set of terms like <code>chrome extension google ads</code> you&rsquo;ll probably see posts on StackOverflow where people quote this and throw up their hands. But this in itself isn&rsquo;t a prohibition; it&rsquo;s an attempt to summarize <em>someone else&rsquo;s</em> prohibition. Let&rsquo;s see if we can&rsquo;t track down a primary source for this.</p>
+<h2 id="adsense-program-policies">AdSense Program policies</h2>
+<p>Following AdSense Policies link takes us to the <a href="https://support.google.com/adsense/answer/48182">AdSense Program policies page</a> page. The first thing I do when trying to quickly grok something like this is search the page for relevant terms. The word &ldquo;extension&rdquo; doesn&rsquo;t appear anywhere on the this page and the word &ldquo;browser&rdquo; only appears twice. Looks like i&rsquo;ll actually have to dig into the text and try to divine the spirit of their meaning.</p>
+<p>I&rsquo;ll spare you the blow-by-blow analysis and I&rsquo;ll summarize most of this page is just absolutely hammering home that Google <em>really</em> don&rsquo;t want publishers (the site showing ads) to do an ad fraud. Beyond that, there are only a couple of passages related to the question we&rsquo;re trying to answer.</p>
+<blockquote>
+<p><strong>Ad placement</strong></p>
+<p>Publishers are encouraged to experiment with a variety of placements and ad formats. However, <!-- raw HTML omitted -->AdSense code may not be placed in inappropriate places such as pop-ups, emails or software<!-- raw HTML omitted -->. Publishers must also adhere to the policies for each product used. Please see our <a href="https://support.google.com/adsense/answer/1346295">ad placement policies</a> article for more information.</p>
+</blockquote>
+<p>The second sentence in this passage describes &ldquo;software&rdquo; as an inappropriate place to display AdSense ads. That&rsquo;s a pretty broad category, but writ large they appear to be saying that AdSense may only be used to monetize websites. To drive that point home they continue:</p>
+<blockquote>
+<p>Google ads, search boxes or search results may not be:</p>
+<ul>
+<li>Integrated into a software application (does not apply to AdMob) of any kind, including toolbars.</li>
+</ul>
+</blockquote>
+<p>The use of &ldquo;including toolbars&rdquo; here is interesting. As previously mentioned, this document doesn&rsquo;t use the word &ldquo;extension,&rdquo; so this (dated) reference to Internet Explorer toolbars is about as close as we&rsquo;ll get and their stance seems clear.</p>
+<p>But to drive the point home, let&rsquo;s follow that &ldquo;ad placement policies&rdquo; link from the first quotation and see what they have to say.</p>
+<blockquote>
+<p><strong>Ads in a software application</strong></p>
+<p><!-- raw HTML omitted -->Publishers are not permitted to distribute Google ads or AdSense for search boxes through software applications including<!-- raw HTML omitted -->, but not limited to toolbars, <!-- raw HTML omitted -->browser extensions<!-- raw HTML omitted -->, and desktop applications. AdSense code may only be implemented on web-based pages and approved WebView technologies.</p>
+</blockquote>
+<p>That&rsquo;s about as explicit a prohibition as I could imagine. But, I should note that the first paragraph of page explicitly identifies the page as covering &ldquo;Adsense ad placement policies.&rdquo; That&rsquo;s critical because didn&rsquo;t shut the door on Google Ads in extensions: there&rsquo;s an AdMob-shaped escape hatch we can look into.</p>
+<h2 id="admobs-behavioral-policies">AdMob&rsquo;s Behavioral policies</h2>
+<p>AdMob is governed by the AdSense program policies, but with some additional exceptions and guidance for this specific product. On a side note, I don&rsquo;t know why they decided to name the page that provides that guidance &ldquo;<a href="https://support.google.com/admob/answer/2753860">Behavioral policies</a>&rdquo; rather than something like &ldquo;AdMob product policies&rdquo; but, well, there it is.</p>
+<blockquote>
+<p><strong>Exceptions to AdSense policie</strong></p>
+<p>In principle, all AdMob publishers must follow our online program policies, however there are certain policies that differ between AdSense and AdMob. Please see the exceptions below.</p>
+</blockquote>
+<p>&ldquo;Ad placement&rdquo; presented a problem in the AdSense policies, so what does AdMob policy say?</p>
+<blockquote>
+<p><strong>Ad placement</strong></p>
+<p>Publishers are encouraged to experiment with a variety of placements and ad formats, but must comply with the <a href="https://support.google.com/admob/answer/9335564">Google Publisher Policies</a>. Please also review our <a href="https://support.google.com/admob/answer/2936217?sjid=12229413281836938645-NA">implementation guidance</a>.</p>
+</blockquote>
+<h2 id="adsense-implementation-guidance">AdSense Implementation guidance</h2>
+<p>The <a href="https://support.google.com/admob/answer/2936217?sjid=12229413281836938645-NA">Implementation guidance</a> page doesn&rsquo;t contain any explicit mention of extensions/toolbars or other language similar to what we saw before about not allowing ads in certain types of software. It does, however, contain the following guidance:</p>
+<blockquote>
+<p><strong>Integrate the latest SDK</strong></p>
+<p>It&rsquo;s important to always stay updated with the latest SDK (for <a href="https://developers.google.com/admob/android/sdk">Android</a>, <a href="https://developers.google.com/admob/ios/download">iOS</a>), which will give you access to the latest ad formats, features, and bug fixes.</p>
+</blockquote>
+<p>This passage is interesting because it implies that SDK integration is important without explicitly saying it&rsquo;s required.</p>
+<p>So, <em>is</em> it required? Let&rsquo;s see what the AdSesne and AdMob policy pages have to say. The <a href="https://support.google.com/admob/answer/2753860">AdMob policy</a> page references the this SDK and the fact that it&rsquo;s used to serve personalized ads:</p>
+<blockquote>
+<p><strong>Personalized advertising</strong></p>
+<p>Google may use the advertising ID from the device on which the ad is serving to generate interests and demographics (for example, &lsquo;sports enthusiasts&rsquo;). Interests, demographics, and other data may be used to serve better targeted ads to the user. Additionally, your app&rsquo;s privacy policy may need to be updated to reflect the use of <!-- raw HTML omitted -->personalized advertising (formerly known as interest-based advertising) served via the Google Mobile Ads SDK<!-- raw HTML omitted -->.</p>
+</blockquote>
+<p>Again, this does not explicitly say that the SDK must be used, but that fact is heavily implied.</p>
+<p>The smoking gun appears on the <a href="https://support.google.com/adsense/answer/48182">AdSense Program policies</a> page in the &ldquo;Technical requirements for web content viewing frames for apps&rdquo; section.</p>
+<blockquote>
+<ol>
+<li>
+<p>WebView API for Ads<!-- raw HTML omitted -->App developers are encouraged to integrate the WebView API for Ads to register WebView instances (Android: <a href="https://developer.android.com/reference/android/webkit/WebView">WebView</a>, iOS: <a href="https://developer.apple.com/documentation/webkit/wkwebview">WKWebView</a>) with Google Mobile Ads SDK.</p>
+<p>[…]</p>
+<p>AdMob and Ad Manager in-app ads may be shown in an app next to a WebView as long as the Google Mobile Ads SDK is in use and the publisher is compliant with all other relevant program policies and guidelines.</p>
+</li>
+</ol>
+</blockquote>
+<p>I read this section as saying that developers MUST use the <a href="https://developers.google.com/ad-manager/mobile-ads-sdk">Google Mobile Ads SDK</a> to manage AdMob and Ad Manager ads. There&rsquo;s only one problem: Google doesn&rsquo;t provide a JavaScript SDK. They have Android, iOS, and Flutter SDKs.</p>
+<p>Well … shucks.</p>
+<h2 id="wrap-up">Wrap up</h2>
+<p>We ran through a bunch of different Google Ads policy documents to try to figure out whether or not browser extension developers can integrate Google Ads in their products. Here&rsquo;s what we found:</p>
+<ul>
+<li><strong>AdSense</strong>
+<ul>
+<li>Forbidden from appearing in browser extensions (<a href="https://support.google.com/adsense/answer/1346295">source</a>).</li>
+</ul>
+</li>
+<li><strong>AdMob</strong>
+<ul>
+<li>Policy does not forbid these ads from appearing in extensions.</li>
+<li>Ads must be handled by the <a href="https://developers.google.com/ad-manager/mobile-ads-sdk">Google Mobile Ads SDK</a>.</li>
+<li>There is no JavaScript version of this SDK.</li>
+</ul>
+</li>
+</ul>
+<p>Given all that, it looks like there&rsquo;s currently no policy-compliant way to display Google Ads in a browser extension. This could change if either (a) Google allowed extensions to use AsSense or (b) Google provided either a WebExtension SDK or a JavaScript SDK.</p>
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://dotproto.com/2023/02/28/microblog-thoughts-discovery.html">Micro.blog thoughts #4: Discovery and organization</a></h1>
+		
+
+		<a href="https://dotproto.com/2023/02/28/microblog-thoughts-discovery.html" class="u-url"><time class="dt-published" datetime="2023-02-28 15:13:42 -0700">Feb 28, 2023</time></a>
+
+		<div class="e-content">
+			 <p>Came across <a href="https://grepjason.sh/discover/">grepjason.sh/discover/</a> (via <a href="https://help.micro.blog/t/emoji-in-discover/34">the docs</a>) when looking for more info about how to find people talking about stuff I&rsquo;m interested in. It&rsquo;s an overly large bucket, but I&rsquo;d still very much like to see <a href="https://micro.blog/burk">@burk</a>&rsquo;s suggestion of a 💻 tagmoji for &ldquo;Technology/Programming&rdquo;. As someone specifically interested in the web and web browsers, I&rsquo;d selfishly like to suggest 🕸 for &ldquo;Internet/Web&rdquo;.</p>
+<p>Even if it&rsquo;s not surfaced to other Micro.blog users, I&rsquo;d love to see a way for a user to tag or otherwise organize their own posts. This omission seems a bit surprising given Micro.blog&rsquo;s emphasis on users hosting their blogs on their own domains.</p>
+<p><strong>Thread</strong></p>
+<ul>
+<li>Previous: <a href="https://dotproto.com/2023/02/28/microblog-thoughts-posts.html">Micro.blog thoughts #3: posts &gt;300 characters</a></li>
+</ul>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://dotproto.com/2023/02/28/microblog-thoughts-posts.html">Micro.blog thoughts #3: posts &gt;300 characters</a></h1>
+		
+
+		<a href="https://dotproto.com/2023/02/28/microblog-thoughts-posts.html" class="u-url"><time class="dt-published" datetime="2023-02-28 14:58:09 -0700">Feb 28, 2023</time></a>
+
+		<div class="e-content">
+			 <p>Next weird thing, the UX around adding titles is odd. I know posts don&rsquo;t have a hard 300 character limit. The docs suggest giving your post a title when it&rsquo;s over 300 characters, but it&rsquo;s not clear what that looks or feels like. Does only the title appear in the feed? If we jack into Hugo-level customizations can users provide a metadata field for a description and use that instead?</p>
+<p>As a new user, it&rsquo;s odd and surprising to me that the title field doesn&rsquo;t even appear in the editor UI until the draft post contains at least 300 characters. I just checked for an account level setting to make this setting always appear, but no dice. That might be good fodder for a browser extension.</p>
+<p><strong>Thread</strong></p>
+<ul>
+<li>Previous: <a href="https://dotproto.com/2023/02/28/re-dotprotocom-new.html">Micro.blog thoughts #2: Threading</a></li>
+<li>Next: <a href="https://dotproto.com/2023/02/28/microblog-thoughts-discovery.html">Micro.blog thoughts #4: Discovery and organization</a></li>
+</ul>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://dotproto.com/2023/02/28/re-dotprotocom-new.html">Micro.blog thoughts #2: Threading</a></h1>
+		
+
+		<a href="https://dotproto.com/2023/02/28/re-dotprotocom-new.html" class="u-url"><time class="dt-published" datetime="2023-02-28 14:49:32 -0700">Feb 28, 2023</time></a>
+
+		<div class="e-content">
+			 <p>Re: <a href="https://dotproto.com/2023/02/28/im-trying-to.html">dotproto.com/2023/02/2&hellip;</a></p>
+<p>New stumbling block: threading. There&rsquo;s no obvious way to link multiple microblog posts together. For the moment I guess I&rsquo;ll fall back to manually referencing the previous post as I have here, but that&rsquo;s obviously not ideal.</p>
+<p>EDIT: The original approach I used was to add &ldquo;Re: [LINK TO PREVIOUS POST]&rdquo; on the first line. I&rsquo;m replacing that with a manually created &ldquo;previous&rdquo; and &ldquo;next&rdquo; footer links.</p>
+<p><strong>Thread</strong></p>
+<ul>
+<li>Previous: <a href="https://dotproto.com/2023/02/28/im-trying-to.html">Micro.blog thoughts #1: Am noob, send help</a></li>
+<li>Next: <a href="https://dotproto.com/2023/02/28/microblog-thoughts-posts.html">Micro.blog thoughts #3: posts &gt;300 characters</a></li>
+</ul>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://dotproto.com/2023/02/28/im-trying-to.html">Micro.blog thoughts #1: Am noob, send help</a></h1>
+		
+
+		<a href="https://dotproto.com/2023/02/28/im-trying-to.html" class="u-url"><time class="dt-published" datetime="2023-02-28 14:45:53 -0700">Feb 28, 2023</time></a>
+
+		<div class="e-content">
+			 <p>I&rsquo;m trying to wrap my head around how to engage with the micro.blog community and I feel like I&rsquo;m grasping at straws. If you&rsquo;re already here and active, you probably have a pool of people that you read, but as someone with no existing ties I feel adrift. <a href="https://micro.blog/discover">micro.blog/discover</a> is too limited :/</p>
+<p><strong>Thread</strong></p>
+<ul>
+<li>Next: <a href="https://dotproto.com/2023/02/28/re-dotprotocom-new.html">Micro.blog thoughts #2: Threading</a></li>
+</ul>
+
+		</div>
+	  </div>
+	
+
+</div>
+
+
+    
+    
+
+  </body>
+
+</html>
