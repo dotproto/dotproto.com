@@ -24,6 +24,57 @@
 	
 	  <div class="h-entry">
 		
+			<h1><a href="https://dotproto.com/2023/06/06/a-warning-about.html">A warning about monetizing extensions with search</a></h1>
+		
+
+		<a href="https://dotproto.com/2023/06/06/a-warning-about.html" class="u-url"><time class="dt-published" datetime="2023-06-06 13:47:48 -0700">Jun 6, 2023</time></a>
+
+		<div class="e-content">
+			 <p><em>This post is based on <a href="https://groups.google.com/a/chromium.org/g/chromium-extensions/c/axnSqOfoPpo/m/BEf0VhIYAAAJ">a comment I shared</a> on the <a href="https://groups.google.com/a/chromium.org/g/chromium-extensions/">chromium-extensions</a> group.</em></p>
+<p>It&rsquo;s a frustratingly frequent experience for extension developers: you&rsquo;re going through your customer feedback sent to your contact email address (a <a href="https://developer.chrome.com/docs/webstore/terms/#:~:text=You%20agree%20to%20supply%20and%20maintain%20valid%20and%20accurate%20contact%20information%20that%20will%20be%20displayed%20in%20each%20product%20detail%20page">CWS requirement</a>) and you come across something like this:</p>
+<blockquote>
+<p>I&rsquo;m reaching out to you concerning the potential revenue generation from your Chrome Extension, <!-- raw HTML omitted -->. We are keen on offering our premium product, Bing Hosted Feed, which is a high-quality search solution.</p>
+<p>This represents an excellent chance to incorporate a search feature into your Chrome extension, thereby monetizing your users' search activities. With this integration, you stand to earn up to $500 per month for every 1,000 users, paving the way for an extra passive income stream from your extension.</p>
+<p>Even if your extension currently lacks a search function, there&rsquo;s no cause for concern. We are fully prepared to guide you through a straightforward update process to incorporate the search function. This update is fully compliant with Google Chrome store&rsquo;s guidelines, and should you find it unsatisfactory, you&rsquo;re always free to revert the changes at any point.</p>
+</blockquote>
+<p>I don&rsquo;t fault anyone for being tempted by this kind of offer; it&rsquo;s hard not to be intrigued by solid money in exchange for a seemingly minor integration. But if something seems too good to be true, it probably is. Despite their claims, I&rsquo;d bet dollars to doughnuts that what they&rsquo;re doing doesn&rsquo;t comply with CWS policy. Worse, these services may well end up getting your extension flagged as malware.</p>
+<p>Let&rsquo;s talk about what these kinds of monetization schemes typically ask of developers, look at some relevant Chrome Web Store policies, and see why integrating with them will likely land you in hot water.</p>
+<h2 id="what-they-want">What they want</h2>
+<p>The people behind these emails want to replace the user&rsquo;s search engine with something that pays them for that traffic.</p>
+<p>Why? Because search is very valuable. While it&rsquo;s hard to find solid numbers on exactly <em>how</em> valuable, <a href="https://www.theverge.com/2023/3/9/23631912/microsoft-bing-100-million-daily-active-users-milestone">Philippe Ockenden</a>, Microsoft&rsquo;s Corporate Vice President of Finance, said on an investor call that &ldquo;For every 1 point of share gain in the search advertising market, it&rsquo;s a $2 billion revenue opportunity for our advertising business.&rdquo; That&rsquo;s big money.</p>
+<p>More concretely, the people behind these emails typically want the integrating extension to change the user&rsquo;s default search provider using <a href="https://developer.chrome.com/docs/extensions/mv3/settings_override/">Settings Overrides</a>. In some cases, though, they may ask developers to expose a search box in the extension&rsquo;s UI or on websites. A search box would usually be integrated by adding some pre-defined HTML and their JavaScript library into the target page.</p>
+<p>They don&rsquo;t mention this part, but they&rsquo;re also looking to minimize their own risk at your expense. They know that CWS can only take action against an extension and its developer. So, if the worst happens and the code they asked you to integrate is flagged for malware, <em>your</em> extension will be taken down and your account will be suspended.</p>
+<h2 id="chrome-web-store-policies">Chrome Web Store policies</h2>
+<p>Roughly <a href="https://developer.chrome.com/blog/cws-policy-revamp/">7 months ago</a> Google revamped the <a href="https://developer.chrome.com/docs/webstore/program-policies/">CWS Developer Policies</a> around three principals: be safe, be honest, be useful. These simple statements get to the core of what the policies aim to accomplish: enhance the user&rsquo;s web browsing experience without deception, fraud, mishandling of data, or disregard for the user&rsquo;s wishes.</p>
+<p>I mention that here because search monetization, by its very nature, can be considered a form of browser hijacking. From <a href="https://en.wikipedia.org/wiki/Browser_hijacking">Wikipedia</a>:</p>
+<blockquote>
+<p><strong>Browser hijacking</strong> is a form of <a href="https://en.wikipedia.org/wiki/Potentially_unwanted_program">unwanted software</a> that modifies a <a href="https://en.wikipedia.org/wiki/Web_browser">web browser</a>&rsquo;s settings without a user&rsquo;s permission, to inject unwanted advertising into the user&rsquo;s browser. A browser hijacker may replace the existing <a href="https://en.wikipedia.org/wiki/Home_page">home page</a>, error page, or <a href="https://en.wikipedia.org/wiki/Search_engine">search engine</a> with its own.<a href="https://en.wikipedia.org/wiki/Browser_hijacking#cite_note-1"><!-- raw HTML omitted -->[1]<!-- raw HTML omitted --></a> These are generally used to force <a href="https://en.wikipedia.org/wiki/Hit_(Internet)">hits</a> to a particular <a href="https://en.wikipedia.org/wiki/Website">website</a>, increasing its <a href="https://en.wikipedia.org/wiki/Online_advertising">advertising</a> revenue.</p>
+</blockquote>
+<p>Let&rsquo;s walk through some specific policies in order to see how search monetization may put your extension at risk.</p>
+<h3 id="single-purpose-policy">Single purpose policy</h3>
+<p>CWS has long had a &ldquo;single purpose policy&rdquo; (SPP) that essentially requires each extension have one well-defined raison d&rsquo;être. Generally speaking, this means that all of the features an extension exposes must be part of a unifying theme. This policy is currently captured in the <a href="https://developer.chrome.com/docs/webstore/program-policies/quality-guidelines/">Quality Guidelines</a> policies.</p>
+<p>One area where SPP enforcement is stricter than average, though, is search. For the purposes of CWS review, changing a user&rsquo;s default search provider is considered a distinct purpose. In other words, if the search monetization service instructs you to declare a search provider in your extension&rsquo;s manifest with <code>&quot;is_default&quot;: true</code>, that integration is basically guaranteed to violate this policy.</p>
+<h3 id="api-use">API use</h3>
+<p>The <a href="https://developer.chrome.com/docs/webstore/program-policies/api-use/">API Use</a> policies require that developers &ldquo;use existing Chrome APIs for their designated use case. Use of any other method, for which an API exists, would be considered a violation.&rdquo;  If the extension is exposing a general purpose search box, the extension <em>must</em> use <a href="https://developer.chrome.com/docs/extensions/reference/search/#method-query"><code>chrome.search.query()</code></a> (or <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/search/search"><code>browser.search.search()</code></a> in Firefox) to perform the search.</p>
+<h3 id="policies-aimed-at-protecting-user-privacy">Policies aimed at protecting user privacy</h3>
+<p>Integrating a search monetization service will likely violate a couple of the policies grouped under <a href="https://developer.chrome.com/docs/webstore/program-policies/#protecting-user-privacy">Protecting User Privacy</a>.</p>
+<p>The <a href="https://developer.chrome.com/docs/webstore/program-policies/limited-use/">Limited Use</a> policies requires that user data only be accessed/collected for purposes directly tied to the extension&rsquo;s purpose. Any data collected must be limited &ldquo;to the extent required for a user-facing feature described prominently in the Product&rsquo;s Chrome Web Store page and in the Product&rsquo;s user interface.&rdquo;</p>
+<p>Similarly, the <a href="https://developer.chrome.com/docs/webstore/program-policies/disclosure-requirements/">Disclosure Requirements</a> policies state that extensions must disclose the data they handle (collect, use, or share) and, if necessary, get informed user consent for that handling.</p>
+<p>While one might argue that the extension isn&rsquo;t collecting search data, it directly facilitates sending user data to a 3rd party service which may collect the user&rsquo;s data for advertising purposes. That data would not have been collected but for the fact that the user had the extension installed. At best, that&rsquo;s aiding and abetting – not a great defense to use when trying to get back into good standing.</p>
+<p>Finally, the <a href="https://developer.chrome.com/docs/webstore/program-policies/unexpected-behavior/">Misleading or Unexpected Behavior</a> policies clearly state that extensions must not &ldquo;misrepresent the functionality of your product or include non-obvious functionality that doesn&rsquo;t serve the primary purpose of the product.&rdquo;</p>
+<p>Let&rsquo;s make this a bit more concrete with an example. Say you had an extension that exposed a search field that looked and mostly behaved like a standard search box in your browser. Now say that when you executed a search using that box, the results page was on a website you weren&rsquo;t used to seeing. I think it would be fair to say that the search box didn&rsquo;t behave as expected.</p>
+<h2 id="a-compliant-example">A compliant example</h2>
+<p>At the moment, I can only imagine one situation where it would be appropriate for an extension to execute a search without using the default search provider: if the extension is exposing specialized search capabilities related to its single purpose.</p>
+<p>For example, let&rsquo;s say there is an extension designed to help users find, collect, reference, and site academic papers. This extension could expose a search box that lets users search through the academic databases and industry journals they are signed into. This type of search is directly related to the extension&rsquo;s primary purpose, makes sense in context, respects the user&rsquo;s preferences, and does not introduce new privacy concerns.</p>
+<h2 id="wrap-up">Wrap up</h2>
+<p>Trying to monetize an extension by sending search traffic to a non-standard search provider is, at best, risky business. Browser hijacking is a serious threat to users and anything that looks like it has a very real risk of being classified as malware.</p>
+<p>My advice: steer clear of offers to monetize your extension via search revenue sharing.</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
 			<h1><a href="https://dotproto.com/2023/05/04/google-ads-in.html">Google Ads in Browser Extensions</a></h1>
 		
 
