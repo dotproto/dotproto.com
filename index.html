@@ -24,10 +24,76 @@
 	
 	  <div class="h-entry">
 		
+			<h1><a href="https://dotproto.com/2024/04/10/open-in-vsc.html">Open in VSC with Shortcuts on macOS</a></h1>
+		
+
+		<a href="https://dotproto.com/2024/04/10/open-in-vsc.html" class="u-url"><time class="dt-published" datetime="2024-04-11 00:06:55 &#43;0100">Apr 11, 2024</time></a>
+
+		<div class="e-content">
+			 <p>I&rsquo;m not sure why, but for some reason this morning it occurred to me that I could probably use Shortcuts on macOS to improve my day-to-day workflow. Often when poking around in Finder I want to open a given directory in <a href="https://code.visualstudio.com/">Visual Studio Code</a> (VSC). My normal workflow is:</p>
+<ol>
+<li><!-- raw HTML omitted -->Cmd+Tab<!-- raw HTML omitted --> over VSC</li>
+<li>Hit <!-- raw HTML omitted -->Cmd+Shift+N<!-- raw HTML omitted --> to create a new window</li>
+<li><!-- raw HTML omitted -->Cmd+Tab<!-- raw HTML omitted --> back to the Finder window</li>
+<li>Drag the directory onto the new VSC window</li>
+</ol>
+<p>This works well enough, but one glaring problem with this workflow: I&rsquo;m lazy.</p>
+<p>I&rsquo;d love to be able to just right-click the directory in Finder and open it directly in VS Code. I&rsquo;ve used Automator to set this up in the past, but it was more awkward than I&rsquo;d like. Also, I lost that automation one or two laptop migrations ago, so I couldn&rsquo;t even use it if I wanted to.</p>
+<p>Turns out this is pretty easy to do in Shortcuts … if you know what you&rsquo;re doing. I don&rsquo;t, so I fumbled around for a while. So, here&rsquo;s the tutorial I wish I had 20 minutes ago.</p>
+<ol>
+<li>
+<p>Open Shortcuts.</p>
+</li>
+<li>
+<p>Click the &ldquo;Quick Actions&rdquo; category in the left sidebar.</p>
+<p><em>Note: This isn&rsquo;t strictly necessary, it just helps make setting up the shortcut input a little faster</em></p>
+</li>
+<li>
+<p>Click the + icon in the toolbar to create a new shortcut.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>Change the input type from &ldquo;Images and 18 more&rdquo; to &ldquo;Files and Folders&rdquo;.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>Click &ldquo;Quick actions&rdquo; to choose what kind of actions can invoke this shortcut. In this case, I only wanted to use the shortcut inside Finder.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>Under &ldquo;If there&rsquo;s no input&rdquo;, change this value to &ldquo;Stop and respond&rdquo;.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><em>Note: This will prevent the shortcut from doing anything if it was invoked without the right kind of input.</em></p>
+</li>
+<li>
+<p>Next, switch the right view back to the Action Library, search for &ldquo;Run Shell Script&rdquo;, and either double-click it or drag it below the input box we just configured.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>Change the &ldquo;Input&rdquo; dropdown to &ldquo;Shortcut Input&rdquo; and the &ldquo;Pass Input&rdquo; dropdown to &ldquo;as arguments&rdquo;.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>Change the shell script from <code>echo &quot;Hello World&quot;</code> to <code>code &quot;$1&quot;</code>.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><em>Note: <code>$1</code> refers to the first argument passed to the shell script. We surround it with quotes in order to make sure paths that contain spaces work as expected.</em></p>
+</li>
+<li>
+<p>Let&rsquo;s warp this up by giving the shortcut an icon and name. Change the name by clicking on &ldquo;Run shell script&rdquo; in the title and typing the new title. Change the icon by clicking the icon in the title bar and selecting the icon and color you want to use. I went with &ldquo;circled right arrow&rdquo; in Blue.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</li>
+</ol>
+<p>And with that, you should now be able to right-click on a folder in Finder, open Quick Actions, and select &ldquo;Open in VSC&rdquo;. Happy shortcutting ;)</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
 			<h1><a href="https://dotproto.com/2023/06/01/cws-poliy-diff.html">CWS Policy Diff - May 30, 2023</a></h1>
 		
 
-		<a href="https://dotproto.com/2023/06/01/cws-poliy-diff.html" class="u-url"><time class="dt-published" datetime="2023-06-12 17:44:16 -0700">Jun 12, 2023</time></a>
+		<a href="https://dotproto.com/2023/06/01/cws-poliy-diff.html" class="u-url"><time class="dt-published" datetime="2023-06-13 01:44:16 &#43;0100">Jun 13, 2023</time></a>
 
 		<div class="e-content">
 			 <p>Another few months have passed and the Chrome team has published another set of updates to the Chrome Web Store&rsquo;s (CWS&rsquo;s) <a href="https://developer.chrome.com/docs/webstore/program-policies/">Program Policies</a>. Typically the Chrome team would announce this kind of update with a blog post as well as an email to developers, this time they only sent out the developer email (<a href="https://groups.google.com/a/chromium.org/g/chromium-extensions/c/2KWhd7nFFJs/m/-NDQ4tI3AQAJ">reposted publicly</a> by <a href="https://www.stefanvd.net/blog/">Stefan Van Damme</a>). They probably skipped the blog post this time because of the small scale of the update, both in lines of text and impact.</p>
@@ -82,7 +148,7 @@
 			<h1><a href="https://dotproto.com/2023/06/06/a-warning-about.html">A warning about monetizing extensions with search</a></h1>
 		
 
-		<a href="https://dotproto.com/2023/06/06/a-warning-about.html" class="u-url"><time class="dt-published" datetime="2023-06-06 13:47:48 -0700">Jun 6, 2023</time></a>
+		<a href="https://dotproto.com/2023/06/06/a-warning-about.html" class="u-url"><time class="dt-published" datetime="2023-06-06 21:47:48 &#43;0100">Jun 6, 2023</time></a>
 
 		<div class="e-content">
 			 <p><em>This post is based on <a href="https://groups.google.com/a/chromium.org/g/chromium-extensions/c/axnSqOfoPpo/m/BEf0VhIYAAAJ">a comment I shared</a> on the <a href="https://groups.google.com/a/chromium.org/g/chromium-extensions/">chromium-extensions</a> group.</em></p>
@@ -133,7 +199,7 @@
 			<h1><a href="https://dotproto.com/2023/05/04/google-ads-in.html">Google Ads in Browser Extensions</a></h1>
 		
 
-		<a href="https://dotproto.com/2023/05/04/google-ads-in.html" class="u-url"><time class="dt-published" datetime="2023-05-08 11:26:13 -0700">May 8, 2023</time></a>
+		<a href="https://dotproto.com/2023/05/04/google-ads-in.html" class="u-url"><time class="dt-published" datetime="2023-05-08 19:26:13 &#43;0100">May 8, 2023</time></a>
 
 		<div class="e-content">
 			 <p>Chrome Web Store policy allows ads in extensions, but can Google&rsquo;s ad products be used in browser extensions? Let&rsquo;s dig through some policy docs to find out.</p>
@@ -230,7 +296,7 @@
 			<h1><a href="https://dotproto.com/2023/02/28/microblog-thoughts-discovery.html">Micro.blog thoughts #4: Discovery and organization</a></h1>
 		
 
-		<a href="https://dotproto.com/2023/02/28/microblog-thoughts-discovery.html" class="u-url"><time class="dt-published" datetime="2023-02-28 15:13:42 -0700">Feb 28, 2023</time></a>
+		<a href="https://dotproto.com/2023/02/28/microblog-thoughts-discovery.html" class="u-url"><time class="dt-published" datetime="2023-02-28 23:13:42 &#43;0100">Feb 28, 2023</time></a>
 
 		<div class="e-content">
 			 <p>Came across <a href="https://grepjason.sh/discover/">grepjason.sh/discover/</a> (via <a href="https://help.micro.blog/t/emoji-in-discover/34">the docs</a>) when looking for more info about how to find people talking about stuff I&rsquo;m interested in. It&rsquo;s an overly large bucket, but I&rsquo;d still very much like to see <a href="https://micro.blog/burk">@burk</a>&rsquo;s suggestion of a 💻 tagmoji for &ldquo;Technology/Programming&rdquo;. As someone specifically interested in the web and web browsers, I&rsquo;d selfishly like to suggest 🕸 for &ldquo;Internet/Web&rdquo;.</p>
@@ -248,7 +314,7 @@
 			<h1><a href="https://dotproto.com/2023/02/28/microblog-thoughts-posts.html">Micro.blog thoughts #3: posts &gt;300 characters</a></h1>
 		
 
-		<a href="https://dotproto.com/2023/02/28/microblog-thoughts-posts.html" class="u-url"><time class="dt-published" datetime="2023-02-28 14:58:09 -0700">Feb 28, 2023</time></a>
+		<a href="https://dotproto.com/2023/02/28/microblog-thoughts-posts.html" class="u-url"><time class="dt-published" datetime="2023-02-28 22:58:09 &#43;0100">Feb 28, 2023</time></a>
 
 		<div class="e-content">
 			 <p>Next weird thing, the UX around adding titles is odd. I know posts don&rsquo;t have a hard 300 character limit. The docs suggest giving your post a title when it&rsquo;s over 300 characters, but it&rsquo;s not clear what that looks or feels like. Does only the title appear in the feed? If we jack into Hugo-level customizations can users provide a metadata field for a description and use that instead?</p>
@@ -267,7 +333,7 @@
 			<h1><a href="https://dotproto.com/2023/02/28/re-dotprotocom-new.html">Micro.blog thoughts #2: Threading</a></h1>
 		
 
-		<a href="https://dotproto.com/2023/02/28/re-dotprotocom-new.html" class="u-url"><time class="dt-published" datetime="2023-02-28 14:49:32 -0700">Feb 28, 2023</time></a>
+		<a href="https://dotproto.com/2023/02/28/re-dotprotocom-new.html" class="u-url"><time class="dt-published" datetime="2023-02-28 22:49:32 &#43;0100">Feb 28, 2023</time></a>
 
 		<div class="e-content">
 			 <p>Re: <a href="https://dotproto.com/2023/02/28/im-trying-to.html">dotproto.com/2023/02/2&hellip;</a></p>
@@ -287,7 +353,7 @@
 			<h1><a href="https://dotproto.com/2023/02/28/im-trying-to.html">Micro.blog thoughts #1: Am noob, send help</a></h1>
 		
 
-		<a href="https://dotproto.com/2023/02/28/im-trying-to.html" class="u-url"><time class="dt-published" datetime="2023-02-28 14:45:53 -0700">Feb 28, 2023</time></a>
+		<a href="https://dotproto.com/2023/02/28/im-trying-to.html" class="u-url"><time class="dt-published" datetime="2023-02-28 22:45:53 &#43;0100">Feb 28, 2023</time></a>
 
 		<div class="e-content">
 			 <p>I&rsquo;m trying to wrap my head around how to engage with the micro.blog community and I feel like I&rsquo;m grasping at straws. If you&rsquo;re already here and active, you probably have a pool of people that you read, but as someone with no existing ties I feel adrift. <a href="https://micro.blog/discover">micro.blog/discover</a> is too limited :/</p>
