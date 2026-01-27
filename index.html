@@ -24,10 +24,83 @@
 	
 	  <div class="h-entry">
 		
+			<h1><a href="https://dotproto.com/2026/01/26/notes-on-contributing-to-webextensions.html">Notes on contributing to WebExtensions in WebKit </a></h1>
+		
+
+		<a href="https://dotproto.com/2026/01/26/notes-on-contributing-to-webextensions.html" class="u-url"><time class="dt-published" datetime="2026-01-26 23:12:07 -0800">Jan 26, 2026</time></a>
+
+		<div class="e-content">
+			 <p>I wanted to learn a bit more about WebKit, so I decided to take a crack at fixing an easy looking WebExtensions  <a href="https://bugs.webkit.org/show_bug.cgi?id=297838">bug 297838</a>. This post just serves to gather a couple of notes on the contribution process before they fall out of my head.</p>
+<h2 id="process">Process</h2>
+<ol>
+<li>Select bug
+<ol>
+<li>Search <a href="https://bugs.webkit.org">bugs.webkit.org</a>.</li>
+<li>Take the bug. If you have rights, assign the bug to yourself. If not, comment indicating interest in working on the issue.</li>
+</ol>
+</li>
+</ol>
+<h2 id="links">Links</h2>
+<ul>
+<li><a href="https://webkit.org/contributing-code/">Contributing Code</a></li>
+<li><a href="https://webkit.org/code-style-guidelines/">Code Style Guidelines</a></li>
+<li><a href="https://webkit.org/testing-contributions/">Testing Contributions</a></li>
+<li><a href="https://webkit.org/building-webkit/">Building WebKit</a>. See <a href="https://webkit.org/building-webkit/#using-xcode">Using Xcode</a> for Xcode setup.</li>
+<li><a href="https://webkit.slack.com/">WebKit Slack</a>, <a href="https://webkit.slack.com/archives/C0682UVA6AD">#web-extensions-dev</a> room (<a href="https://webkit.org/getting-started/">to join</a>)</li>
+</ul>
+<h2 id="building">Building</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">webkit-build --debug
+</code></pre></div><h2 id="testing">Testing</h2>
+<p>The set of tests that are run will be slightly different depending on whether you&rsquo;re working with release or test builds.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">run-api-tests --debug WKWebExtension*
+</code></pre></div><h2 id="thoughts">Thoughts</h2>
+<ul>
+<li>What&rsquo;s the difference between <!-- raw HTML omitted -->git-webkit pull-request<!-- raw HTML omitted --> and <!-- raw HTML omitted -->webkit-patch upload<!-- raw HTML omitted -->?
+<ul>
+<li>Use <!-- raw HTML omitted -->git-webkit pr<!-- raw HTML omitted -->.  It seems the <!-- raw HTML omitted -->webkit-patch<!-- raw HTML omitted --> command is an older tool originally created to support a different workflow.</li>
+</ul>
+</li>
+<li>Xcode is weird.
+<ul>
+<li>I’m used to thinking about a project as a directory in my filesystem. Xcode has its own model of a &ldquo;project&rdquo; that is related to but distinct from that idea.</li>
+<li>To find the current file in the navigator view, right click inside the editor view and select <!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->Navigate<!-- raw HTML omitted --><!-- raw HTML omitted --> &gt; <!-- raw HTML omitted --><!-- raw HTML omitted -->Reveal<!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --> in Project Navigator (<!-- raw HTML omitted --><!-- raw HTML omitted -->Cmd<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->J<!-- raw HTML omitted --><!-- raw HTML omitted -->)</li>
+<li>When I first set up my local dev environment, I decided to use XCode because I assumed it would be the preferred tool. While trying to figure out the difference between <!-- raw HTML omitted -->git-webkit<!-- raw HTML omitted --> and <!-- raw HTML omitted -->webkit-patch<!-- raw HTML omitted -->, though, I realized that not everything in the repo is represented in the project navigator view. More specifically, there is no project in the workspace that corresponds to the <a href="https://github.com/WebKit/WebKit/tree/main/Tools">Tools</a> directory in the project&rsquo;s root. As a result, searching the entire workspace for the string &ldquo;pull-request&rdquo; turned up no results.</li>
+</ul>
+</li>
+</ul>
+<h2 id="keyboard-shortcuts">Keyboard shortcuts</h2>
+<table>
+<thead>
+<tr>
+<th>Shortcut</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><!-- raw HTML omitted --><!-- raw HTML omitted -->Cmd<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->[<!-- raw HTML omitted --><!-- raw HTML omitted --></td>
+<td>Show previous tab</td>
+</tr>
+<tr>
+<td><!-- raw HTML omitted --><!-- raw HTML omitted -->Cmd<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->]<!-- raw HTML omitted --><!-- raw HTML omitted --></td>
+<td>Show next tab</td>
+</tr>
+</tbody>
+</table>
+<h2 id="open-questions">Open questions</h2>
+<ul>
+<li>Can you get Xcode&rsquo;s build command to play well with the <code>webkit-build --debug</code> and <code>run-api-tests --debug</code> CLI commands? If not, I may have to switch editors.</li>
+</ul>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
 			<h1><a href="https://dotproto.com/2024/04/10/open-in-vsc.html">Open in VSC with Shortcuts on macOS</a></h1>
 		
 
-		<a href="https://dotproto.com/2024/04/10/open-in-vsc.html" class="u-url"><time class="dt-published" datetime="2024-04-11 00:06:55 &#43;0100">Apr 11, 2024</time></a>
+		<a href="https://dotproto.com/2024/04/10/open-in-vsc.html" class="u-url"><time class="dt-published" datetime="2024-04-10 15:06:55 -0800">Apr 10, 2024</time></a>
 
 		<div class="e-content">
 			 <p>I&rsquo;m not sure why, but for some reason this morning it occurred to me that I could probably use Shortcuts on macOS to improve my day-to-day workflow. Often when poking around in Finder I want to open a given directory in <a href="https://code.visualstudio.com/">Visual Studio Code</a> (VSC). My normal workflow is:</p>
@@ -93,7 +166,7 @@
 			<h1><a href="https://dotproto.com/2023/06/01/cws-poliy-diff.html">CWS Policy Diff - May 30, 2023</a></h1>
 		
 
-		<a href="https://dotproto.com/2023/06/01/cws-poliy-diff.html" class="u-url"><time class="dt-published" datetime="2023-06-13 01:44:16 &#43;0100">Jun 13, 2023</time></a>
+		<a href="https://dotproto.com/2023/06/01/cws-poliy-diff.html" class="u-url"><time class="dt-published" datetime="2023-06-12 16:44:16 -0800">Jun 12, 2023</time></a>
 
 		<div class="e-content">
 			 <p>Another few months have passed and the Chrome team has published another set of updates to the Chrome Web Store&rsquo;s (CWS&rsquo;s) <a href="https://developer.chrome.com/docs/webstore/program-policies/">Program Policies</a>. Typically the Chrome team would announce this kind of update with a blog post as well as an email to developers, this time they only sent out the developer email (<a href="https://groups.google.com/a/chromium.org/g/chromium-extensions/c/2KWhd7nFFJs/m/-NDQ4tI3AQAJ">reposted publicly</a> by <a href="https://www.stefanvd.net/blog/">Stefan Van Damme</a>). They probably skipped the blog post this time because of the small scale of the update, both in lines of text and impact.</p>
@@ -148,7 +221,7 @@
 			<h1><a href="https://dotproto.com/2023/06/06/a-warning-about.html">A warning about monetizing extensions with search</a></h1>
 		
 
-		<a href="https://dotproto.com/2023/06/06/a-warning-about.html" class="u-url"><time class="dt-published" datetime="2023-06-06 21:47:48 &#43;0100">Jun 6, 2023</time></a>
+		<a href="https://dotproto.com/2023/06/06/a-warning-about.html" class="u-url"><time class="dt-published" datetime="2023-06-06 12:47:48 -0800">Jun 6, 2023</time></a>
 
 		<div class="e-content">
 			 <p><em>This post is based on <a href="https://groups.google.com/a/chromium.org/g/chromium-extensions/c/axnSqOfoPpo/m/BEf0VhIYAAAJ">a comment I shared</a> on the <a href="https://groups.google.com/a/chromium.org/g/chromium-extensions/">chromium-extensions</a> group.</em></p>
@@ -199,7 +272,7 @@
 			<h1><a href="https://dotproto.com/2023/05/04/google-ads-in.html">Google Ads in Browser Extensions</a></h1>
 		
 
-		<a href="https://dotproto.com/2023/05/04/google-ads-in.html" class="u-url"><time class="dt-published" datetime="2023-05-08 19:26:13 &#43;0100">May 8, 2023</time></a>
+		<a href="https://dotproto.com/2023/05/04/google-ads-in.html" class="u-url"><time class="dt-published" datetime="2023-05-08 10:26:13 -0800">May 8, 2023</time></a>
 
 		<div class="e-content">
 			 <p>Chrome Web Store policy allows ads in extensions, but can Google&rsquo;s ad products be used in browser extensions? Let&rsquo;s dig through some policy docs to find out.</p>
@@ -296,7 +369,7 @@
 			<h1><a href="https://dotproto.com/2023/02/28/microblog-thoughts-discovery.html">Micro.blog thoughts #4: Discovery and organization</a></h1>
 		
 
-		<a href="https://dotproto.com/2023/02/28/microblog-thoughts-discovery.html" class="u-url"><time class="dt-published" datetime="2023-02-28 23:13:42 &#43;0100">Feb 28, 2023</time></a>
+		<a href="https://dotproto.com/2023/02/28/microblog-thoughts-discovery.html" class="u-url"><time class="dt-published" datetime="2023-02-28 14:13:42 -0800">Feb 28, 2023</time></a>
 
 		<div class="e-content">
 			 <p>Came across <a href="https://grepjason.sh/discover/">grepjason.sh/discover/</a> (via <a href="https://help.micro.blog/t/emoji-in-discover/34">the docs</a>) when looking for more info about how to find people talking about stuff I&rsquo;m interested in. It&rsquo;s an overly large bucket, but I&rsquo;d still very much like to see <a href="https://micro.blog/burk">@burk</a>&rsquo;s suggestion of a 💻 tagmoji for &ldquo;Technology/Programming&rdquo;. As someone specifically interested in the web and web browsers, I&rsquo;d selfishly like to suggest 🕸 for &ldquo;Internet/Web&rdquo;.</p>
@@ -314,7 +387,7 @@
 			<h1><a href="https://dotproto.com/2023/02/28/microblog-thoughts-posts.html">Micro.blog thoughts #3: posts &gt;300 characters</a></h1>
 		
 
-		<a href="https://dotproto.com/2023/02/28/microblog-thoughts-posts.html" class="u-url"><time class="dt-published" datetime="2023-02-28 22:58:09 &#43;0100">Feb 28, 2023</time></a>
+		<a href="https://dotproto.com/2023/02/28/microblog-thoughts-posts.html" class="u-url"><time class="dt-published" datetime="2023-02-28 13:58:09 -0800">Feb 28, 2023</time></a>
 
 		<div class="e-content">
 			 <p>Next weird thing, the UX around adding titles is odd. I know posts don&rsquo;t have a hard 300 character limit. The docs suggest giving your post a title when it&rsquo;s over 300 characters, but it&rsquo;s not clear what that looks or feels like. Does only the title appear in the feed? If we jack into Hugo-level customizations can users provide a metadata field for a description and use that instead?</p>
@@ -333,7 +406,7 @@
 			<h1><a href="https://dotproto.com/2023/02/28/re-dotprotocom-new.html">Micro.blog thoughts #2: Threading</a></h1>
 		
 
-		<a href="https://dotproto.com/2023/02/28/re-dotprotocom-new.html" class="u-url"><time class="dt-published" datetime="2023-02-28 22:49:32 &#43;0100">Feb 28, 2023</time></a>
+		<a href="https://dotproto.com/2023/02/28/re-dotprotocom-new.html" class="u-url"><time class="dt-published" datetime="2023-02-28 13:49:32 -0800">Feb 28, 2023</time></a>
 
 		<div class="e-content">
 			 <p>Re: <a href="https://dotproto.com/2023/02/28/im-trying-to.html">dotproto.com/2023/02/2&hellip;</a></p>
@@ -353,7 +426,7 @@
 			<h1><a href="https://dotproto.com/2023/02/28/im-trying-to.html">Micro.blog thoughts #1: Am noob, send help</a></h1>
 		
 
-		<a href="https://dotproto.com/2023/02/28/im-trying-to.html" class="u-url"><time class="dt-published" datetime="2023-02-28 22:45:53 &#43;0100">Feb 28, 2023</time></a>
+		<a href="https://dotproto.com/2023/02/28/im-trying-to.html" class="u-url"><time class="dt-published" datetime="2023-02-28 13:45:53 -0800">Feb 28, 2023</time></a>
 
 		<div class="e-content">
 			 <p>I&rsquo;m trying to wrap my head around how to engage with the micro.blog community and I feel like I&rsquo;m grasping at straws. If you&rsquo;re already here and active, you probably have a pool of people that you read, but as someone with no existing ties I feel adrift. <a href="https://micro.blog/discover">micro.blog/discover</a> is too limited :/</p>
