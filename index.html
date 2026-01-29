@@ -32,11 +32,28 @@
 		<div class="e-content">
 			 <p>I wanted to learn a bit more about WebKit, so I decided to take a crack at fixing an easy looking WebExtensions  <a href="https://bugs.webkit.org/show_bug.cgi?id=297838">bug 297838</a>. This post just serves to gather a couple of notes on the contribution process before they fall out of my head.</p>
 <h2 id="process">Process</h2>
+<p>This assumes that you&rsquo;ve</p>
 <ol>
 <li>Select bug
 <ol>
-<li>Search <a href="https://bugs.webkit.org">bugs.webkit.org</a>.</li>
-<li>Take the bug. If you have rights, assign the bug to yourself. If not, comment indicating interest in working on the issue.</li>
+<li>Find the bug you want to work on <a href="https://bugs.webkit.org">bugs.webkit.org</a>.</li>
+<li>If you have rights, assign the bug to yourself. If not, comment indicating interest in working on the issue.</li>
+</ol>
+</li>
+<li>Submit for review
+<ol>
+<li>Run <code>check-webkit-style</code> to make sure updates follow the <a href="https://webkit.org/code-style-guidelines/">style guide</a>. Be aware that reviewers may ask for additional formatting changes on the PR.</li>
+<li>Run <code>git commit</code> (without flags) to create a commit message using the project&rsquo;s commit message template. Provide all of the requested info and complete the commit.</li>
+<li>Run <code>git-webkit pr</code>. This will push an update to your personal repo on GitHub, create a PR on the main repo, and update the WebKit Bugzilla issue with a PR link.</li>
+<li>Once the PR is created, <a href="https://github.com/webkit-early-warning-system">webkit-early-warning-system</a> will leave a comment  with links to test suite results. Make sure everything passes as expected.</li>
+<li>Wait for PR feedback :)</li>
+</ol>
+</li>
+<li>Iterate on feedback
+<ol>
+<li>While working, make iterative changes locally and save checkpoints in Git history via <code>git commit --fixup</code>.</li>
+<li>Run <code>git rebase --autosquash</code> when you&rsquo;re ready to update the PR.</li>
+<li>Run <code>git push -f</code> to push changes to your personal fork (by default, this remote is named <code>fork</code>).</li>
 </ol>
 </li>
 </ol>
